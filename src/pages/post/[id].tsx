@@ -1,6 +1,9 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Post } from '..'
+import { useNextSanityImage } from 'next-sanity-image'
+import client from '../../sanity/client'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const url =
@@ -28,13 +31,11 @@ export const getStaticProps: GetStaticProps<{ post: Post }> = async ({
 
   return {
     props: { post },
-    revalidate: 30
+    revalidate: 10,
   }
 }
 
-const id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(post)
-
+const Id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div>
       <Link href='/'>Go back</Link>
@@ -43,4 +44,5 @@ const id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
     </div>
   )
 }
-export default id
+
+export default Id
