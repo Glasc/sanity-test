@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<{ post: Post }> = async ({
+export const getStaticProps: GetStaticProps<{ post: Post, post2: any }> = async ({
   params,
 }) => {
   const path = params?.id
@@ -30,12 +30,16 @@ export const getStaticProps: GetStaticProps<{ post: Post }> = async ({
   console.log(post2)
 
   return {
-    props: { post },
+    props: { post, post2 },
     revalidate: 5,
   }
 }
 
-const id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const id = ({
+  post,
+  post2,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(post2)
   return (
     <div>
       <Link href='/'>Go back</Link>
