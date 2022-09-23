@@ -26,9 +26,12 @@ export const getStaticProps: GetStaticProps<{ post: Post }> = async ({
   const response = await fetch(url)
   const post: Post = (await response.json()).result[0]
 
+  const post2 = (await response.json()).result
+  console.log(post2)
+
   return {
     props: { post },
-    revalidate: 1,
+    revalidate: 5,
   }
 }
 
