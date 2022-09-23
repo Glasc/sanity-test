@@ -20,9 +20,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch(url)
   const posts: Post[] = (await response.json()).result
 
-  await fetch('https://sanity-test-sage.vercel.app/api/revalidate', {
-    method: 'POST',
-  })
+  const res = await fetch('https://sanity-test-sage.vercel.app/api/revalidate')
+  console.log(res)
 
   return {
     props: { posts },
