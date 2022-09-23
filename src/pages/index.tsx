@@ -30,7 +30,7 @@ const Home: NextPage<{ posts: Post[] }> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const handleRevalidate = () => {
-    fetch('https://sanity-test-sage.vercel.app/api/revalidate', { method: 'POST' })
+    fetch('/api/revalidate')
   }
 
   return (
