@@ -20,6 +20,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch(url)
   const posts: Post[] = (await response.json()).result
 
+  await fetch('http://localhost:3000/api/hello', {
+    method: 'POST',
+  })
+
   return {
     props: { posts },
     revalidate: 5,
