@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: posts?.map((post) => ({
       params: { id: post.id },
     })),
-    fallback: false,
+    fallback: true,
   }
 }
 
