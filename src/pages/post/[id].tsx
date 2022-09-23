@@ -28,12 +28,11 @@ export const getStaticProps: GetStaticProps<{ post: Post }> = async ({
 
   return {
     props: { post },
-    revalidate: 120,
+    revalidate: 5,
   }
 }
 
 const id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log('xd')
   return (
     <div>
       <Link href='/'>Go back</Link>
