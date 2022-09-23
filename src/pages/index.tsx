@@ -15,8 +15,6 @@ export type Post = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  
-
   const url =
     "https://cteelkpu.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D'rotmgPost'%5D%20%7B%0A%22id%22%3A%20_id%2C%0A%20%20%22name%22%3A%20name%2C%0A%20%20%22description%22%3A%20description%2C%0A%20%20%20%22image%22%3A%20image%0A%7D"
   const response = await fetch(url)
@@ -31,6 +29,10 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage<{ posts: Post[] }> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const handleRevalidate = () => {
+    fetch('/api/revalidate', { method: 'POST' })
+  }
+
   return (
     <div className={styles.container}>
       <h1>Artists:</h1>
@@ -43,6 +45,7 @@ const Home: NextPage<{ posts: Post[] }> = ({
           </li>
         ))}
       </ul>
+      <button onClick={handleRevalidate}>revalidatew</button>
     </div>
   )
 }
