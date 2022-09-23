@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Post } from '..'
 
@@ -16,9 +15,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<{ post: Post, post2: any }> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<{
+  post: Post
+}> = async ({ params }) => {
   const path = params?.id
 
   const url = `https://cteelkpu.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D'rotmgPost'%20%26%26%20_id%3D%3D'${path}'%5D%20%7B%0A%20%20%22id%22%3A%20_id%2C%0A%20%20%22name%22%3A%20name%2C%0A%20%20%22image%22%3A%20image%2C%0A%20%20%22description%22%3A%20description%0A%7D`
@@ -26,20 +25,13 @@ export const getStaticProps: GetStaticProps<{ post: Post, post2: any }> = async 
   const response = await fetch(url)
   const post: Post = (await response.json()).result[0]
 
-  const post2 = (await response.json()).result
-  console.log(post2)
-
   return {
-    props: { post, post2 },
+    props: { post },
     revalidate: 5,
   }
 }
 
-const id = ({
-  post,
-  post2,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(post2)
+const Id = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div>
       <Link href='/'>Go back</Link>
@@ -49,4 +41,4 @@ const id = ({
   )
 }
 
-export default id
+export default Id
