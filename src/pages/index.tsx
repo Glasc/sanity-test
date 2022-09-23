@@ -22,30 +22,25 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { posts },
-    revalidate: 5,
+    revalidate: 1,
   }
 }
 
 const Home: NextPage<{ posts: Post[] }> = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const handleRevalidate = () => {
-    fetch('/api/revalidate')
-  }
-
   return (
     <div className={styles.container}>
       <h1>Artists:</h1>
       <ul>
         {posts?.map((post: Post) => (
           <li key={post.id}>
-            <Link href={`/post/${post.id}`}>
+            <Link href={`/${post.id}`}>
               <a>{post.name}</a>
             </Link>
           </li>
         ))}
       </ul>
-      <button onClick={handleRevalidate}>revalidatew</button>
     </div>
   )
 }

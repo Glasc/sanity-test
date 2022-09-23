@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
-import { Post } from '..'
+import { Post } from '.'
 
 export const getStaticProps: GetStaticProps<{
   post: Post
@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: { post },
-    revalidate: 5,
+    revalidate: 1,
   }
 }
 
