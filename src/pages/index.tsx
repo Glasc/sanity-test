@@ -33,11 +33,9 @@ const Home: NextPage<{ posts: Post[] }> = ({
       <h1>Artists:</h1>
       <ul>
         {posts?.map((post: Post) => (
-          <li key={post.id}>
-            <Link href={`/post/${encodeURIComponent(post.id)}`} >
-              <a>{post.name}</a>
-            </Link>
-          </li>
+          <Link key={post.id} href={`/post/${post.id}`}>
+            <a>{post.name}</a>
+          </Link>
         ))}
       </ul>
     </div>
