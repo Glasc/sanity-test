@@ -19,7 +19,8 @@ export const getStaticProps: GetStaticProps = async () => {
     "https://cteelkpu.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D'rotmgPost'%5D%20%7B%0A%22id%22%3A%20_id%2C%0A%20%20%22name%22%3A%20name%2C%0A%20%20%22description%22%3A%20description%2C%0A%20%20%20%22image%22%3A%20image%0A%7D"
   const response = await fetch(url)
   const posts: Post[] = (await response.json()).result
-  await fetch("/api/revalidate")
+  await fetch("api/revalidate")
+
   return {
     props: { posts },
     revalidate: 5,
